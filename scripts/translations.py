@@ -58,8 +58,6 @@ if __name__ == "__main__":
 
     with pandas.ExcelWriter("translations.xlsx") as writer:
         for country, _ in SOURCE_COMBINATIONS:
-            if country == "poland":
-                continue  # FIXME: Remove this when the Poland scraper gets fixed
             pandas.DataFrame.from_dict(output[country]).to_excel(
                 writer, sheet_name=country
             )
