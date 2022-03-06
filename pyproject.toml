@@ -1,0 +1,20 @@
+[project]
+name = "scripts"
+version = "0.1"
+description = "Utility scripts for our projects."
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=1.4.1",
+    "openpyxl>=3.0.9",
+]
+
+[project.urls]
+homepage = "https://github.com/Ukraine-Relief-Efforts/scripts"
+repository = "https://github.com/Ukraine-Relief-Efforts/scripts"
+
+[project.optional-dependencies]
+
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
