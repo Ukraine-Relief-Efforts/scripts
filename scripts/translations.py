@@ -56,8 +56,18 @@ if __name__ == "__main__":
             lang: sentences[index] for index, lang in enumerate(languages)
         }
 
-    with pandas.ExcelWriter("translations.xlsx") as writer:
-        for country, _ in SOURCE_COMBINATIONS:
-            pandas.DataFrame.from_dict(output[country]).to_excel(
-                writer, sheet_name=country
-            )
+    for source_country, source_language in SOURCE_COMBINATIONS:
+        languages: list[str] = copy(SUPPORTED_LANGUAGES)
+        languages.remove(source_language)
+
+        sentences_for_country = output[source_country]
+        for target_language in languages:
+            with pandas.ExcelWriter(
+                f"{source_country}-{source_language}-{target_language}.xlsx"
+            ) as writer:
+                pandas.DataFrame.from_dict(
+                    {
+                        source_language: sentences_for_country[source_language],
+                        target_language: sentences_for_country[target_language],
+                    }
+                ).to_excel(writer)
